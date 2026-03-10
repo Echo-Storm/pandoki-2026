@@ -1,2 +1,1 @@
-gominoa-xbmc-addons
-===================
+Some Pandora Fixes. 

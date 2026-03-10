@@ -134,6 +134,35 @@ Context menu options while playing:
 
 ---
 
+### v0.10.9
+*Changes:*
+
+- **Music Virtualizer context menu label is now state-aware** — Instead of always showing "Toggle Music Virtualizer", the label now reads the current setting when the station list loads and displays either `Music Virtualizer: ON  [toggle off]` or `Music Virtualizer: OFF [toggle on]`. Falls back to the neutral label if the state can't be read. The JSON-RPC call is made once per directory load, not once per station item.
+
+---
+
+### v0.10.8
+*Changes:*
+
+- **Renamed "Toggle Virtualizer" to "Toggle Music Virtualizer"** — label clarified to distinguish it clearly from the visualizer feature added in the same version.
+
+- **Launch Visualizer** context menu item — Right-click any station → "Launch Visualizer" opens Kodi's active music visualizer (Milkdrop, Spectrum, or whatever is configured in Kodi's music settings). Only meaningful while a station is actually playing.
+
+---
+
+### v0.10.7
+*Bugs fixed (from log analysis):*
+
+- **`Search()` crash on Pandora API error** — When Pandora returned an error during station search (e.g. auth lapse, rate limit, or server hiccup), a `PithosError` propagated uncaught all the way through `Loop()` and crashed the plugin instance. Now caught at the `Search()` level: shows a notification, closes the directory cleanly, and the plugin keeps running.
+
+- **`setInfo()` deprecation warnings** — `li.setInfo('music', ...)` is deprecated in Kodi 21 and was flooding the log with warnings every time a song was added to the playlist. Replaced with `li.getMusicInfoTag()` setter calls which are the correct API for Kodi 21+. The log is now clean during normal playback.
+
+*New feature:*
+
+- **Toggle Virtualizer** context menu item — Right-click any station in the station list to toggle Kodi's audio virtualizer (stereo upmix / headphone surround) on or off without leaving the addon. Shows a green ON / red OFF notification confirming the new state. Uses JSON-RPC to read and write `audiooutput.stereoupmix` directly. The notification setting must be enabled in Advanced settings for the confirmation popup to appear.
+
+---
+
 ### v0.10.5 — Original Upstream
 Base version by gominoa, rocky4546, truckershitch. See upstream repo for full history.
 
@@ -153,6 +182,7 @@ Base version by gominoa, rocky4546, truckershitch. See upstream repo for full hi
 
 | File | Changes |
 |---|---|
-| `resources/lib/pandoki/pandoki.py` | All bug fixes and improvements |
+| `resources/lib/pandoki/pandoki.py` | All bug fixes, improvements, and new features |
+| `default.py` | Added `virtualizer` query parameter parsing and dispatch |
 | `resources/settings.xml` | Added Shuffle option to Sort Stations |
-| `addon.xml` | Version bumped to 0.10.6 |
+| `addon.xml` | Version bumped to 0.10.9 |

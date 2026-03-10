@@ -134,6 +134,13 @@ Context menu options while playing:
 
 ---
 
+### v0.10.10
+*Changes:*
+
+- **Visualizer toggle fixed** — `Visualizer()` now checks `Window.IsActive(visualisation)` before acting. If the visualizer is already open, it sends `Action(Back)` to close it; otherwise it opens it. Previously it called `ActivateWindow` blindly with no state check, so it could not close the visualizer. Context menu label updated from "Launch Visualizer" to "Toggle Visualizer" to match the actual behavior.
+
+---
+
 ### v0.10.9
 *Changes:*
 
@@ -185,4 +192,4 @@ Base version by gominoa, rocky4546, truckershitch. See upstream repo for full hi
 | `resources/lib/pandoki/pandoki.py` | All bug fixes, improvements, and new features |
 | `default.py` | Added `virtualizer` query parameter parsing and dispatch |
 | `resources/settings.xml` | Added Shuffle option to Sort Stations |
-| `addon.xml` | Version bumped to 0.10.9 |
+| `addon.xml` | Version bumped to 0.10.10 |
